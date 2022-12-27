@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-python-deployment
+  name: schonk-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: my-python-app
+      app: schon-klinik-app
   template:
     metadata:
       labels:
-        app: my-python-app
+        app: schon-klinik-app
     spec:
       containers:
-      - name: mypythondockerrepo
-        image: myacrrepo312.azurecr.io/akannan1087/mypythondockerrepo:#{Build.BuildId}#
+      - name: klinikContainer
+        image: klinikacr1.azurecr.io/app:scklinik
         ports:
         - containerPort: 5000
 # service type loadbalancer       
@@ -22,10 +22,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-python-app-svc
+  name: schon-klinik-app-svc
 spec:
   selector:
-    app: my-python-app
+    app: schon-klinik-app
   ports:
     - protocol: TCP
       port: 5000
