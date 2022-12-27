@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-python-deployment
+  name: schonk-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: python-app
+      app: schon-klinik-app
   template:
     metadata:
       labels:
-        app: python-app
+        app: schon-klinik-app
     spec:
       containers:
-      - name: my-python-app
-        image: akdevopscoaching/mypython-app
+      - name: schon-klinik-app
+        image: klinikacr1.azurecr.io/app:scklinik
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
@@ -23,10 +23,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: python-app-svc
+  name: schon-klinik-app-svc
 spec:
   selector:
-    app: python-app
+    app: schon-klinik-app
   ports:
     - protocol: TCP
       port: 5000
